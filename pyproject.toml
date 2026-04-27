@@ -1,0 +1,12 @@
+[project]
+name = "cogoff"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "google-genai>=1.73.1",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.2",
+    "python-dotenv>=1.2.2",
+]
