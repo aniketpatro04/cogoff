@@ -3,6 +3,7 @@ from google import genai
 from dotenv import load_dotenv
 from utils.logger import logger
 from utils.retry import retry_llm
+from config.settings import MODEL_NAME
 
 load_dotenv()
 
