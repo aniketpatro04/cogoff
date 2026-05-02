@@ -16,4 +16,6 @@ load_dotenv()
 EXCEL_PATH = os.getenv("EXCEL_PATH", "data/questions.xlsx") # Default Path incase variable is not found
 MARKDOWN_PATH = os.getenv("MARKDOWN_PATH", "outputs/answers.md")
 
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 MODEL_NAME = os.getenv("MODEL_NAME", "gemini-1.5-flash") # Defaults to Gemini-1.5-flash
