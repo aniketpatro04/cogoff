@@ -18,4 +18,4 @@ MARKDOWN_PATH = os.getenv("MARKDOWN_PATH", "outputs/answers.md")
 
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-MODEL_NAME = os.getenv("MODEL_NAME", "gemini-1.5-flash") # Defaults to Gemini-1.5-flash
+MODEL_NAME = os.getenv("MODEL_NAME", "gemini-1.5-flash") # Defaults to Gemini-1.5-flash (Change If Required)
