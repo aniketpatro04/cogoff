@@ -19,3 +19,11 @@ MARKDOWN_PATH = os.getenv("MARKDOWN_PATH", "outputs/answers.md")
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 MODEL_NAME = os.getenv("MODEL_NAME", "gemini-1.5-flash") # Defaults to Gemini-1.5-flash (Change If Required)
+
+
+# Google Sheets Configuration
+# Google Sheets Config
+
+GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME")
+GOOGLE_WORKSHEET_NAME = os.getenv("GOOGLE_WORKSHEET_NAME", "Sheet1")
+GOOGLE_CREDENTIALS_FILE = os.getenv("GOOGLE_CREDENTIALS_FILE", "credentials.json")
