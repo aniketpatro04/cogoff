@@ -24,6 +24,10 @@ MODEL_NAME = os.getenv("MODEL_NAME", "gemini-1.5-flash") # Defaults to Gemini-1.
 # Google Sheets Configuration
 # Google Sheets Config
 
-GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME")
+GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME" , "questions")
 GOOGLE_WORKSHEET_NAME = os.getenv("GOOGLE_WORKSHEET_NAME", "Sheet1")
-GOOGLE_CREDENTIALS_FILE = os.getenv("GOOGLE_CREDENTIALS_FILE", "credentials.json")
+
+GOOGLE_CREDENTIALS_FILE = os.getenv(
+    "GOOGLE_CREDENTIALS_FILE",
+    "credentials/google_service_account.json"
+)
