@@ -62,6 +62,7 @@ def main():
 
 
     print("Hello! Let's Cognitively Offload You!")
+    print("🚀 Starting AI Q&A Pipeline...")
 
     logger.info("Pipeline started")
 
@@ -98,6 +99,7 @@ def main():
         f"Pipeline finished | Processed: {processed_count} | Failed: {failed_count}"
     )
 
+    print("🏁 Pipeline finished")
     print(f"Processed: {processed_count}, Failed: {failed_count}")
 
     # Old Code for v1.00
