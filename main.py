@@ -1,3 +1,5 @@
+from ast import If
+
 from services.excel_service import (
     load_questions,
     get_unanswered_questions,
@@ -33,7 +35,10 @@ def process_question(question):
             answer,
         )
 
-        mark_question_as_answered(EXCEL_PATH, question.id)
+        if USE_GOOGLE_SHEETS:
+             mark_question_as_answered_sheet(question.id)
+        else:
+            mark_question_as_answered(EXCEL_PATH, question.id)
 
         logger.info(f"Completed question ID: {question.id}")
         return True
