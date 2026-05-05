@@ -9,12 +9,16 @@ from services.markdown_service import (
     append_qa_to_markdown,
 )
 
+from services.sheets_service import load_questions_from_sheets, mark_question_as_answered_sheet
 
 from config.settings import EXCEL_PATH, MARKDOWN_PATH
 from utils.logger import logger
 
 # EXCEL_PATH = "data/questions.xlsx"
 # MARKDOWN_PATH = "outputs/answers.md"
+
+# Toggle for Google Sheets Usage
+USE_GOOGLE_SHEETS = True #Default is True, Set to False to use Excel instead
 
 def process_question(question):
 
@@ -67,7 +71,11 @@ def main():
     try:
         initialize_markdown(MARKDOWN_PATH)
 
-        questions = load_questions(EXCEL_PATH)
+        if USE_GOOGLE_SHEETS:
+            questions = load_questions_from_sheets()
+        else:
+            questions = load_questions(EXCEL_PATH)
+
         unanswered = get_unanswered_questions(questions)
 
         if not unanswered:
