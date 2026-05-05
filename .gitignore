@@ -19,3 +19,10 @@ wheels/
 # Log files
 *.log
 logs/
+
+#Google Creds Secrets
+credentials/
+
+
+# Outputs
+outputs/
