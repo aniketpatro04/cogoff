@@ -24,7 +24,7 @@ def generate_answer(question_text: str) -> str:
 
     try:
         response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model=MODEL_NAME,
         contents=prompt)
 
         if not response.text:

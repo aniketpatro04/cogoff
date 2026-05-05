@@ -1,5 +1,5 @@
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2 import service_account
 from models.question import Question
 from utils.logger import logger
 from config.settings import (
@@ -11,18 +11,19 @@ from config.settings import (
 # Function to get the Google Sheet
 def _get_worksheet():
     scope = [
-        "https://spreadsheets.google.com/feeds",
+        "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive",
     ]
 
-    creds = ServiceAccountCredentials.from_json_keyfile_name(
-        GOOGLE_CREDENTIALS_FILE, scope
+    creds = service_account.Credentials.from_service_account_file(
+        GOOGLE_CREDENTIALS_FILE, scopes=scope
     )
 
     client = gspread.authorize(creds)
 
     sheet = client.open(GOOGLE_SHEET_NAME)
     worksheet = sheet.worksheet(GOOGLE_WORKSHEET_NAME)
+    logger.info("Loading Worksheet Successful")
 
     return worksheet
 
