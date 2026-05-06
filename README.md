@@ -1,24 +1,37 @@
-# 🧠 AI Question Answering Pipeline (Phase 1)
+# 🧠 AI Question Answering Pipeline (v2.0.0)
 
 ## 📌 Overview
 
-This project is a **Phase 1 implementation of an AI-powered question answering pipeline** designed to offload cognitive effort by automatically answering questions collected throughout the day.
+This project is an AI-powered asynchronous question answering pipeline designed to help users offload cognitive effort by automatically collecting and answering questions.
 
-The system reads user-defined questions from an Excel sheet, generates answers using an LLM (Google Gemini), and stores the results in a structured Markdown file.
+Users can log questions throughout the day (via Excel or Google Sheets), and the system:
+
+Fetches unanswered questions
+Generates answers using an LLM (Google Gemini)
+Stores results in structured Markdown files
+Marks questions as answered
+Runs safely with logging, retries, and rate limiting
 
 ---
+
+## 🧩 Core Features (Phase 2 & 2.5)
+
+✅ Multi-Input Support
+
+1. Excel (local)
+2. Google Sheets (via API)
 
 ## ⚙️ How It Works
 
 The pipeline follows a simple flow:
 
 ```
-Excel (Questions) → Filter Unanswered → LLM (Gemini) → Markdown Output → Mark as Answered
+Fetch Questions (From Excel or Sheets) → Filter for Unanswered Questions → Generate Answers (Using LLM) → Push answers to Markdown File → Mark the question as Answered
 ```
 
 ### Step-by-step:
 
-1. Load questions from Excel
+1. Load questions from Excel / Sheets
 2. Filter unanswered questions
 3. Send each question to the LLM
 4. Generate answers
@@ -27,102 +40,29 @@ Excel (Questions) → Filter Unanswered → LLM (Gemini) → Markdown Output →
 
 ---
 
-## 📂 Project Structure
+## 🔗 Google Sheets Setup
 
-```
-project/
-│
-├── main.py
-│
-├── services/
-│   ├── excel_service.py
-│   ├── llm_service.py
-│   └── markdown_service.py
-│
-├── models/
-│   └── question.py
-│
-├── data/
-│   └── questions.xlsx
-│
-└── outputs/
-    └── answers.md
-```
+Create a Service Account (Google Cloud)
+Enable:
+Google Sheets API
+Google Drive API
 
----
+Download JSON key → place in:
 
-## 🧩 Core Components
+credentials/google_service_account.json
 
-### 1. `excel_service.py`
+Share your Google Sheet with:
 
-Handles all Excel-related operations.
+<client_email from JSON>
 
-**Functions:**
+Configure .env:
 
-* `load_questions(file_path: str) -> list[Question]`
-  Loads all questions from the Excel file.
+GEMINI_API_KEY=your_key
 
-* `get_unanswered_questions(questions: list[Question]) -> list[Question]`
-  Filters only unanswered questions.
+GOOGLE_SHEET_NAME=Your Sheet Name
+GOOGLE_WORKSHEET_NAME=Sheet1
+GOOGLE_CREDENTIALS_FILE=credentials/google_service_account.json
 
-* `mark_question_as_answered(file_path: str, question_id: int) -> None`
-  Updates the Excel file to mark a question as answered.
-
----
-
-### 2. `llm_service.py`
-
-Handles interaction with the LLM (Google Gemini).
-
-**Functions:**
-
-* `generate_answer(question_text: str) -> str`
-  Sends a question to the LLM and returns the generated answer.
-
----
-
-### 3. `markdown_service.py`
-
-Handles output formatting and storage.
-
-**Functions:**
-
-* `initialize_markdown(file_path: str) -> None`
-  Creates the Markdown file if it does not exist and adds a header.
-
-* `append_qa_to_markdown(file_path: str, question: str, answer: str) -> None`
-  Appends a formatted Q&A entry to the Markdown file.
-
----
-
-### 4. `models/question.py`
-
-Defines the core data structure.
-
-**Question Model:**
-
-* `id: int`
-* `text: str`
-* `is_answered: bool`
-
----
-
-### 5. `main.py`
-
-Orchestrates the entire pipeline.
-
-**Flow:**
-
-* Initialize markdown file
-* Load questions
-* Filter unanswered
-* Process each question:
-
-  * Generate answer
-  * Save to Markdown
-  * Mark as answered
-
----
 
 ## 📊 Excel Sheet Format (IMPORTANT)
 
@@ -138,86 +78,53 @@ Your Excel file must follow this structure:
 * **Questions** → (Required) Text of the question
 * **Answered** → (Required) Boolean (TRUE/FALSE or empty)
 
-### Notes:
-
-* Empty or blank questions are ignored
-* Only rows with `Answered = FALSE` are processed
-
 ---
 
-## 📄 Output Format
-
-The generated Markdown file will look like:
-
-```markdown
-# Daily Q&A Log - YYYY-MM-DD
-
-## Question
-What is a black hole?
-
-### Answer
-A black hole is a region in space where gravity is so strong...
-
----
-
-## Question
-Why do stars twinkle?
-
-### Answer
-Stars twinkle due to atmospheric turbulence...
-
----
-```
-
----
-
-## 🚀 Setup Instructions
+## 🚀 Setup and Run Instructions
 
 ### 1. Install Dependencies
 
-```bash
-pip install pandas openpyxl python-dotenv google-generativeai
-```
+Check out the pyproject.toml file for the dependencies and install the required dependencies using pip or uv.
+
 
 ---
 
-### 2. Create `.env` File
+### 2. Create and Update your `.env` File
 
 ```
 GEMINI_API_KEY=your_api_key_here
+GOOGLE_SHEET_KEY=yout_google_sheet_key
 ```
+
+Add the Google Sheet Key if you want to access the sheet using a key. Should work without it as well if the service account is set up.
 
 ---
 
-### 3. Run the Pipeline
+### 3. Create and Setup your Google Service Account
+
+Setup a Service Account and Enable Dricve and Sheet Acess. 
+Don't forget to share your questions sheet to this Service Account. 
+(This UX will be improved in Phase 3)
+
+---
+
+### 4. Run the Pipeline
+
+You can run the pipeline using the below command or using uv 
 
 ```bash
 python main.py
 ```
 
----
-
-## ⚠️ Limitations (Phase 1)
-
-* No logging
-* No retry mechanism
-* No scheduling (manual execution)
-* No error handling for API failures
-* Excel file is rewritten on each update
+```uv
+un run main.py
+```
 
 ---
 
-## 🔮 Next Steps (Phase 2)
+## 🔮 Next Steps (Phase 3)
 
-* Add logging and observability
-* Implement retry logic
-* Automate execution using cron
-* Improve error handling and robustness
-
----
-
-## 🧠 Key Idea
-
-This project is not just a script — it is the foundation of an **asynchronous AI knowledge processing pipeline** that can evolve into a full-scale AI system.
-
----
+* Add And Compose Into Docker File
+* UI Improvements
+* Rate Limits for LLM Calls
+* Better Scheduling UX
