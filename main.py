@@ -19,8 +19,6 @@ from utils.logger import logger
 import time
 from config.settings import get_random_delay
 
-# EXCEL_PATH = "data/questions.xlsx"
-# MARKDOWN_PATH = "outputs/answers.md"
 
 # Toggle for Google Sheets Usage
 USE_GOOGLE_SHEETS = True #Default is True, Set to False to use Excel instead
@@ -49,20 +47,6 @@ def process_question(question):
     except Exception as e:
         logger.error(f"Failed question ID: {question.id} | Error: {e}")
         return False
-
-    # Old Code for v1.00
-    # Generate the answer from the LLM
-    # answer = generate_answer(question.text)
-
-    # # Append the question and the generated answer to the md file
-    # append_qa_to_markdown(
-    #     MARKDOWN_PATH,
-    #     question.text,
-    #     answer
-    # )
-
-    # # Change the status of the question to answered
-    # mark_question_as_answered(EXCEL_PATH, question.id)
 
 
 
@@ -127,20 +111,6 @@ def main():
 
     print("🏁 Pipeline finished")
     print(f"Processed: {processed_count}, Failed: {failed_count}")
-
-    # Old Code for v1.00
-    # initialize_markdown(MARKDOWN_PATH)
-
-    # questions = load_questions(EXCEL_PATH)
-    # unanswered = get_unanswered_questions(questions)
-
-    # print("Processing Questions.....")
-
-
-    # for question in unanswered:
-    #     process_question(question)
-
-    # print("Oflloading Done!")
 
 
 if __name__ == "__main__":
