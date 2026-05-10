@@ -16,8 +16,9 @@ from services.sheets_service import load_questions_from_sheets, mark_question_as
 from config.settings import EXCEL_PATH, MARKDOWN_PATH
 from utils.logger import logger
 
-# EXCEL_PATH = "data/questions.xlsx"
-# MARKDOWN_PATH = "outputs/answers.md"
+import time
+from config.settings import get_random_delay
+
 
 # Toggle for Google Sheets Usage
 USE_GOOGLE_SHEETS = True #Default is True, Set to False to use Excel instead
@@ -47,20 +48,6 @@ def process_question(question):
         logger.error(f"Failed question ID: {question.id} | Error: {e}")
         return False
 
-    # Old Code for v1.00
-    # Generate the answer from the LLM
-    # answer = generate_answer(question.text)
-
-    # # Append the question and the generated answer to the md file
-    # append_qa_to_markdown(
-    #     MARKDOWN_PATH,
-    #     question.text,
-    #     answer
-    # )
-
-    # # Change the status of the question to answered
-    # mark_question_as_answered(EXCEL_PATH, question.id)
-
 
 
 def main():
@@ -88,14 +75,32 @@ def main():
             logger.info("No unanswered questions found. Nothing to process.")
             print("✅ No new questions to process.")
             return
+        
+        for idx,question in enumerate(unanswered):
 
-        for question in unanswered:
+            print(f"🔄 Processing Question {idx}: {question.text[:50]}...")
             success = process_question(question)
 
             if success:
+                print(f"✅ Completed Question {idx}")
                 processed_count += 1
             else:
+                print(f"❌ Failed Question {idx}")
                 failed_count += 1
+            
+            delay = get_random_delay()
+            logger.info(f"Sleeping for {delay:.2f} seconds before next request")
+            time.sleep(delay)
+
+        
+        # Code for v2.0.0
+        # for question in unanswered:
+        #     success = process_question(question)
+
+        #     if success:
+        #         processed_count += 1
+        #     else:
+        #         failed_count += 1
 
     except Exception as e:
         logger.critical(f"Pipeline failed | Error: {e}")
@@ -106,20 +111,6 @@ def main():
 
     print("🏁 Pipeline finished")
     print(f"Processed: {processed_count}, Failed: {failed_count}")
-
-    # Old Code for v1.00
-    # initialize_markdown(MARKDOWN_PATH)
-
-    # questions = load_questions(EXCEL_PATH)
-    # unanswered = get_unanswered_questions(questions)
-
-    # print("Processing Questions.....")
-
-
-    # for question in unanswered:
-    #     process_question(question)
-
-    # print("Oflloading Done!")
 
 
 if __name__ == "__main__":

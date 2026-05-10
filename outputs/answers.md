@@ -86,3 +86,100 @@ Mesons are tiny, subatomic particles.
 
 ---
 
+## Question
+What is model decay in ML?
+
+### Answer
+Model decay in ML is when a machine learning model's performance and accuracy get worse over time, becoming less reliable at making predictions or decisions.
+
+**Analogy:**
+Imagine you have a **map of a city** that was perfect when it was printed. That map is your ML model. Over time, the city changes – new roads are built, old buildings are torn down, speed limits change. If you keep using your old map, it will lead you astray. The map itself hasn't changed, but the reality it represents has. Your map has "decayed" in usefulness.
+
+**Why it Happens (Simply):**
+ML models learn patterns from past data. Model decay happens because the "real world" changes, and the new data the model sees no longer matches the patterns it learned.
+
+The main reasons are:
+
+1.  **Data Drift:** The characteristics of the input data change.
+    *   **Example:** A model predicting stock prices was trained during a booming economy. If the economy shifts to a recession, the old patterns it learned might not hold true for the new input data.
+2.  **Concept Drift:** The relationship between the input data and the target (what you're trying to predict) changes.
+    *   **Example:** A model predicts if an email is spam. Spammers constantly change their tactics. What used to be a clear sign of spam (e.g., "free money!") might evolve, making the model's old "spam concept" outdated.
+
+**Impact:**
+If left unaddressed, model decay leads to poor predictions, wrong decisions, and can cost businesses money or lead to frustrated users.
+
+**Solution:**
+To fight decay, models need to be regularly **monitored** for performance drops and then **retrained** using fresh, current data.
+
+---
+
+## Question
+What is data drift in production ML?
+
+### Answer
+Data drift in production ML is when the real-world data your deployed machine learning model receives starts to look significantly different from the data it was originally trained on.
+
+**Analogy:**
+Imagine you trained a self-driving car in sunny California. Now, you deploy it in snowy Alaska. The car's "understanding" of the road (its model) won't match the new, snowy conditions (the data it's seeing).
+
+**What happens:**
+When data drift occurs, your model's predictions become less accurate because the "rules" it learned no longer apply well to the new reality. Its performance degrades over time.
+
+**Examples:**
+*   A **spam filter** trained on old types of spam might fail to catch new, sophisticated spam emails because the characteristics of spam have changed.
+*   A **model predicting customer churn** based on past behavior might become inaccurate if a new competitor enters the market, drastically changing customer habits.
+*   A **recommendation system** trained on user preferences from last year might give irrelevant suggestions if user tastes or popular trends have shifted.
+
+---
+
+## Question
+What is KL divergence?
+
+### Answer
+**What is KL Divergence?**
+
+It's a way to measure the difference between two probability distributions.
+*   Imagine you have a **true recipe (P)** for how events should happen.
+*   And you have an **approximate recipe (Q)**, perhaps one your AI model learned.
+
+**What it tells you:**
+KL Divergence tells you how much "information is lost" or how "surprised" you would be if you thought events followed recipe Q, but they actually followed recipe P.
+*   The **higher the KL Divergence**, the more different the recipes are, and the more "wrong" your approximation Q is.
+*   If both recipes are **identical**, the KL Divergence is zero.
+
+**Analogy:**
+Think of it like comparing a **perfect map (P)** of a city to a **hand-drawn sketch (Q)** you made from memory. KL Divergence quantifies how much useful information is missing or wrong in your sketch compared to the perfect map. If your sketch is very accurate, the divergence is low; if it's completely off, it's high.
+
+**Why it's used:**
+In AI and machine learning, we use it to see how well our models' predictions (Q) match the true patterns in the data (P). We often try to make this value as small as possible to improve our models.
+
+---
+
+## Question
+What is Population Stability Index?
+
+### Answer
+The **Population Stability Index (PSI)** is like a "health check" for your data or a prediction model. It tells you if the *mix* of things you're looking at has significantly changed over time.
+
+**Analogy:**
+Imagine you run a bakery. You know your *usual* sales mix: 40% cookies, 30% cakes, 20% bread, 10% pastries. PSI helps you check if your *current* sales mix (e.g., 80% cookies, 10% cakes, 5% bread, 5% pastries) is wildly different from your usual.
+
+**What it is:**
+PSI measures how much the **distribution** of a variable (like customer age, income, or a model's prediction score) has shifted between two different time periods or groups.
+
+**Why it's used:**
+*   Mainly for **predictive models** (e.g., credit scores, fraud detection models).
+*   To see if the *people* or *items* the model is scoring now are similar to the *people* or *items* it learned from initially.
+*   If the "population" changes too much, the model might become inaccurate or "stale."
+
+**How it works (simply):**
+1.  It divides your data (e.g., model scores, customer ages) into "bins" (like low, medium, high scores, or age groups).
+2.  It compares the **percentage** of data in each bin *now* versus the **percentage** in each bin *historically* (or when the model was built).
+3.  It gives you a single number that quantifies this overall difference.
+
+**What the number means:**
+*   **Low PSI:** The population is stable. The mix hasn't changed much. Your model is likely still reliable. (Bakery still selling its usual mix).
+*   **High PSI:** The population has significantly shifted. The mix is very different. Your model might be "outdated" or performing poorly and needs review. (Suddenly everyone wants cookies, very few cakes).
+
+---
+

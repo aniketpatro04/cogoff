@@ -10,6 +10,7 @@
 
 import os
 from dotenv import load_dotenv
+import random
 
 load_dotenv()
 
@@ -32,3 +33,10 @@ GOOGLE_CREDENTIALS_FILE = os.getenv(
     "GOOGLE_CREDENTIALS_FILE",
     "credentials/google_service_account.json"
 )
+
+
+MIN_DELAY_SECONDS = int(os.getenv("MIN_DELAY_SECONDS", 5))
+MAX_DELAY_SECONDS = int(os.getenv("MAX_DELAY_SECONDS", 10))
+
+def get_random_delay() -> float:
+    return random.uniform(MIN_DELAY_SECONDS, MAX_DELAY_SECONDS)
