@@ -16,6 +16,9 @@ from services.sheets_service import load_questions_from_sheets, mark_question_as
 from config.settings import EXCEL_PATH, MARKDOWN_PATH
 from utils.logger import logger
 
+import time
+from config.settings import get_random_delay
+
 # EXCEL_PATH = "data/questions.xlsx"
 # MARKDOWN_PATH = "outputs/answers.md"
 
@@ -88,14 +91,32 @@ def main():
             logger.info("No unanswered questions found. Nothing to process.")
             print("✅ No new questions to process.")
             return
+        
+        for idx,question in enumerate(unanswered):
 
-        for question in unanswered:
+            print(f"🔄 Processing Question {idx}: {question.text[:50]}...")
             success = process_question(question)
 
             if success:
+                print(f"✅ Completed Question {idx}")
                 processed_count += 1
             else:
+                print(f"❌ Failed Question {idx}")
                 failed_count += 1
+            
+            delay = get_random_delay()
+            logger.info(f"Sleeping for {delay:.2f} seconds before next request")
+            time.sleep(delay)
+
+        
+        # Code for v2.0.0
+        # for question in unanswered:
+        #     success = process_question(question)
+
+        #     if success:
+        #         processed_count += 1
+        #     else:
+        #         failed_count += 1
 
     except Exception as e:
         logger.critical(f"Pipeline failed | Error: {e}")
