@@ -26,7 +26,7 @@ MODEL_NAME = os.getenv("MODEL_NAME", "gemini-2.5-flash") # Defaults to Gemini-2.
 
 GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME" , "questions")
 GOOGLE_WORKSHEET_NAME = os.getenv("GOOGLE_WORKSHEET_NAME", "Sheet1")
-GOOGLE_SHEET_KEY = os.getenv("GOOGLE_SHEET_KEY" , "1NRsAnzQzIfjEQaO3HdmfBfTKTYeiTY5J2cp31Q_KJbE") #change this to your own sheet key
+GOOGLE_SHEET_KEY = os.getenv("GOOGLE_SHEET_KEY" , "Your_Sheet_key_here") #change this to your own sheet key
 
 GOOGLE_CREDENTIALS_FILE = os.getenv(
     "GOOGLE_CREDENTIALS_FILE",
