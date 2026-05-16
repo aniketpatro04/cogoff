@@ -183,3 +183,57 @@ PSI measures how much the **distribution** of a variable (like customer age, inc
 
 ---
 
+## Question
+What is LDA?
+
+### Answer
+LDA (Latent Dirichlet Allocation) is a technique for **topic modeling**.
+
+**What it does:**
+It helps you **discover hidden themes (topics)** within a large collection of text documents (like articles, emails, or social media posts).
+
+**How it works (simplified):**
+LDA assumes that:
+1.  Every document is a **mix of several topics**.
+2.  Every topic is a **mix of various words**.
+
+LDA then works backward to figure out these mixtures. It's "unsupervised," meaning you don't tell it what the topics are beforehand; it finds them on its own.
+
+**Analogy:**
+Imagine you have a huge pile of unmarked recipes. You don't know if they are for cakes, soups, or salads.
+
+*   **You (LDA)** don't know the categories initially.
+*   But you notice that recipes often containing "flour," "sugar," and "eggs" tend to group together. You might label this group "Baking."
+*   Recipes with "tomato," "onion," and "broth" form another group, which you label "Soup."
+
+**Outcome:**
+LDA will tell you:
+*   **What are the main topics?** (e.g., "Baking," "Soup," "Salad").
+*   **Which words define each topic?** (e.g., "Baking" = {flour, sugar, eggs, oven...}).
+*   **Which topics are in each document, and how much?** (e.g., "Recipe A is 80% 'Baking' and 20% 'Dessert').
+
+In short: **LDA finds the secret ingredients that make up the hidden flavors (topics) in a bowl of words (documents).**
+
+---
+
+## Question
+What is PCA?
+
+### Answer
+PCA, or **Principal Component Analysis**, is like finding the shortest, clearest summary of a really long, detailed story.
+
+**Analogy:**
+Imagine you have a super detailed city map showing every single street, building, tree, and bench – that's your **complex data** with many features. Now, imagine a subway map. It doesn't show all the tiny details, but it clearly shows the main lines and stations, allowing you to understand the city's transport system and get where you need to go.
+
+**What PCA Does:**
+PCA is a technique to simplify complex datasets. It acts like the subway map designer:
+
+1.  **Finds Key Patterns:** It identifies the main "directions" or patterns in your data that capture the most important information. These are called **Principal Components**.
+2.  **Reduces Clutter:** It discards the less important, redundant, or noisy details, much like the subway map removes all the non-essential geographical features.
+3.  **Simplifies Data:** It transforms many original features (like every street on the city map) into a fewer, more meaningful set of new features (like the subway lines) that still explain most of what's happening.
+
+**In Short:**
+PCA helps you take a dataset with a lot of different pieces of information and boil it down to just the **most impactful parts**, making it easier to understand, visualize, and work with, without losing too much of the original meaning.
+
+---
+
