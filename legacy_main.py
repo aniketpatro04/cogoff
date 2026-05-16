@@ -1,23 +1,23 @@
 from ast import If
 
-from services.excel_service import (
+from app.services.excel_service import (
     load_questions,
     get_unanswered_questions,
     mark_question_as_answered,
 )
-from services.llm_service import generate_answer
-from services.markdown_service import (
+from app.services.llm_service import generate_answer
+from app.services.markdown_service import (
     initialize_markdown,
     append_qa_to_markdown,
 )
 
-from services.sheets_service import load_questions_from_sheets, mark_question_as_answered_sheet
+from app.services.sheets_service import load_questions_from_sheets, mark_question_as_answered_sheet
 
-from config.settings import EXCEL_PATH, MARKDOWN_PATH
-from utils.logger import logger
+from app.config.settings import EXCEL_PATH, MARKDOWN_PATH
+from app.utils.logger import logger
 
 import time
-from config.settings import get_random_delay
+from app.config.settings import get_random_delay
 
 
 # Toggle for Google Sheets Usage

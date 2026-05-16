@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 
-from utils.logger import logger
+from app.utils.logger import logger
 
 #Initialising a Markdown file if not already
 def initialize_markdown(file_path: str) -> None:

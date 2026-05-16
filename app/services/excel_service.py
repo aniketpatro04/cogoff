@@ -1,6 +1,6 @@
 import pandas as pd
-from models.question import Question
-from utils.logger import logger
+from app.models.question import Question
+from app.utils.logger import logger
 
 
 

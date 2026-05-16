@@ -1,8 +1,8 @@
 import gspread
 from google.oauth2 import service_account
-from models.question import Question
-from utils.logger import logger
-from config.settings import (
+from app.models.question import Question
+from app.utils.logger import logger
+from app.config.settings import (
     GOOGLE_SHEET_NAME,
     GOOGLE_WORKSHEET_NAME,
     GOOGLE_CREDENTIALS_FILE,
