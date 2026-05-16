@@ -13,6 +13,13 @@ from app.services.markdown_service import (
     get_markdown_filename,
 )
 
+import time
+
+from app.config.settings import (
+    EXCEL_PATH,
+    get_random_delay,
+)
+
 from app.config.settings import EXCEL_PATH
 
 router = APIRouter(prefix="/process", tags=["Processing"])
@@ -29,7 +36,10 @@ def process_questions():
 
     processed = []
 
-    for question in unanswered[:10]:
+    questions_to_process = unanswered[:10]
+
+    
+    for idx, question in enumerate(questions_to_process):
 
         answer = generate_answer(question.text)
 
@@ -45,6 +55,14 @@ def process_questions():
                 "question": question.text,
             }
         )
+
+        if idx < len(questions_to_process) - 1:
+
+            delay = get_random_delay()
+
+            print(f"Sleeping for {delay:.2f} seconds")
+
+            time.sleep(delay)
 
     return {
         "processed_count": len(processed),
