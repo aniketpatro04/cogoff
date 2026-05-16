@@ -3,6 +3,11 @@ import os
 
 from app.utils.logger import logger
 
+
+def get_markdown_filename(base_path: str) -> str:
+    date_str = datetime.now().date()
+    return f"{base_path}/answers_{date_str}.md"
+
 #Initialising a Markdown file if not already
 def initialize_markdown(file_path: str) -> None:
 
@@ -41,3 +46,6 @@ def append_qa_to_markdown(file_path: str, question: str, answer: str) -> None:
     #     f.write(f"## Question\n{question}\n\n")
     #     f.write(f"### Answer\n{answer}\n\n")
     #     f.write("---\n\n")
+
+
+
