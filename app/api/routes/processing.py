@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from app.services.excel_service import (
     load_questions,
     get_unanswered_questions,
+    mark_question_as_answered,
 )
 
 from app.services.llm_service import generate_answer
@@ -55,6 +56,8 @@ def process_questions():
                 "question": question.text,
             }
         )
+
+        mark_question_as_answered(EXCEL_PATH, question.id)
 
         if idx < len(questions_to_process) - 1:
 
