@@ -11,10 +11,18 @@
 import os
 from dotenv import load_dotenv
 import random
+from pathlib import Path
 
 load_dotenv()
 
-EXCEL_PATH = os.getenv("EXCEL_PATH", "data/questions.xlsx") # Default Path incase variable is not found
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+OUTPUTS_DIR = BASE_DIR / "outputs"
+LOGS_DIR = BASE_DIR / "logs"
+UPLOADS_DIR = BASE_DIR / "uploads"
+EXCEL_PATH = BASE_DIR / "data" / "questions.xlsx"
+
+#EXCEL_PATH = os.getenv("EXCEL_PATH", "data/questions.xlsx") # Default Path incase variable is not found
 MARKDOWN_PATH = os.getenv("MARKDOWN_PATH", "outputs/answers.md")
 
 

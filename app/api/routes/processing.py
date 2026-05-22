@@ -18,6 +18,7 @@ import time
 
 from app.config.settings import (
     EXCEL_PATH,
+    OUTPUTS_DIR,
     get_random_delay,
 )
 
@@ -29,7 +30,7 @@ router = APIRouter(prefix="/process", tags=["Processing"])
 @router.post("/")
 def process_questions():
 
-    markdown_file = get_markdown_filename("outputs")
+    markdown_file = get_markdown_filename(OUTPUTS_DIR)
     initialize_markdown(markdown_file)
 
     questions = load_questions(EXCEL_PATH)
