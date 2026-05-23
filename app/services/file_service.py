@@ -4,6 +4,8 @@ from pathlib import Path
 
 from fastapi import UploadFile
 
+from fastapi import HTTPException
+
 from app.config.settings import UPLOADS_DIR
 
 ALLOWED_EXTENSIONS = [".xlsx"]
@@ -35,5 +37,20 @@ def save_uploaded_file(
 
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
+
+    return file_path
+
+
+# Get the path of the uploaded file based on the job id
+def get_uploaded_file_path(job_id: str) -> Path:
+
+    file_path = UPLOADS_DIR / f"{job_id}.xlsx"
+
+    if not file_path.exists():
+
+        raise HTTPException(
+            status_code=404,
+            detail="Uploaded file not found",
+        )
 
     return file_path
