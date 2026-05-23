@@ -7,6 +7,7 @@ from fastapi import UploadFile
 from fastapi import HTTPException
 
 from app.config.settings import UPLOADS_DIR
+from app.config.settings import OUTPUTS_DIR
 
 ALLOWED_EXTENSIONS = [".xlsx"]
 
@@ -54,3 +55,22 @@ def get_uploaded_file_path(job_id: str) -> Path:
         )
 
     return file_path
+
+
+
+# Get the path of the output file based on the job id
+def get_output_file_path(job_id: str) -> Path:
+
+    output_path = (
+        OUTPUTS_DIR /
+        f"answers_{job_id}.md"
+    )
+
+    if not output_path.exists():
+
+        raise HTTPException(
+            status_code=404,
+            detail="Output file not found",
+        )
+
+    return output_path
