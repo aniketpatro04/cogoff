@@ -3,6 +3,9 @@ import os
 
 from app.utils.logger import logger
 
+from pathlib import Path
+from app.config.settings import OUTPUTS_DIR
+
 
 def get_markdown_filename(base_path: str) -> str:
     date_str = datetime.now().date()
@@ -48,4 +51,9 @@ def append_qa_to_markdown(file_path: str, question: str, answer: str) -> None:
     #     f.write("---\n\n")
 
 
+# Function to get the path of the markdown file for a given job id
+def get_output_markdown_path(job_id: str) -> Path:
 
+    OUTPUTS_DIR.mkdir(exist_ok=True)
+
+    return OUTPUTS_DIR / f"answers_{job_id}.md"
