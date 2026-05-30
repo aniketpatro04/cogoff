@@ -14,6 +14,7 @@ from app.services.file_service import (
 from app.services.validation_service import (
     validate_excel_structure,
 )
+from datetime import datetime
 
 router = APIRouter(
     prefix="/upload",
@@ -49,5 +50,6 @@ async def upload_excel_file(
         "message": "File uploaded successfully",
         "job_id": job_id,
         "filename": file.filename,
+        "uploaded_at": datetime.utcnow().isoformat(),
         "saved_path": str(saved_path),
     }
