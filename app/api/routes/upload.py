@@ -11,6 +11,10 @@ from app.services.file_service import (
     validate_file_extension,
 )
 
+from app.services.validation_service import (
+    validate_excel_structure,
+)
+
 router = APIRouter(
     prefix="/upload",
     tags=["Upload"],
@@ -38,6 +42,8 @@ async def upload_excel_file(
         file=file,
         job_id=job_id,
     )
+
+    validate_excel_structure(saved_path)
 
     return {
         "message": "File uploaded successfully",
