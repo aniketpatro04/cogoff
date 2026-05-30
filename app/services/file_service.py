@@ -74,3 +74,21 @@ def get_output_file_path(job_id: str) -> Path:
         )
 
     return output_path
+
+
+def delete_uploaded_file(
+    job_id: str,
+) -> bool:
+
+    file_path = (
+        UPLOADS_DIR /
+        f"{job_id}.xlsx"
+    )
+
+    if file_path.exists():
+
+        file_path.unlink()
+
+        return True
+
+    return False
