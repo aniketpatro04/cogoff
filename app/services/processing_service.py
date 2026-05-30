@@ -19,6 +19,13 @@ from app.services.markdown_service import (
     get_output_markdown_path,
     initialize_markdown,
 )
+from app.services.validation_service import (
+    validate_question_count,
+)
+
+
+
+
 
 def process_questions_from_excel(
     excel_path,
@@ -30,6 +37,8 @@ def process_questions_from_excel(
     initialize_markdown(markdown_path)
 
     questions = load_questions(excel_path)
+
+    validate_question_count(questions)
 
     unanswered = get_unanswered_questions(questions)
 
