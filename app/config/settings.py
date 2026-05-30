@@ -42,6 +42,13 @@ GOOGLE_CREDENTIALS_FILE = os.getenv(
     "credentials/google_service_account.json"
 )
 
+# Max Questions to process per request (can be configured in .env file, defaults to 100)
+MAX_QUESTIONS_PER_REQUEST = int(
+    os.getenv(
+        "MAX_QUESTIONS_PER_REQUEST",
+        15
+    )
+)
 
 MIN_DELAY_SECONDS = int(os.getenv("MIN_DELAY_SECONDS", 5))
 MAX_DELAY_SECONDS = int(os.getenv("MAX_DELAY_SECONDS", 10))
