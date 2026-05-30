@@ -22,6 +22,9 @@ from app.services.markdown_service import (
 from app.services.validation_service import (
     validate_question_count,
 )
+from app.services.file_service import (
+    delete_uploaded_file,
+)
 
 
 
@@ -43,6 +46,7 @@ def process_questions_from_excel(
     unanswered = get_unanswered_questions(questions)
 
     processed = []
+    failed = []
 
     for idx, question in enumerate(unanswered):
 
@@ -86,8 +90,23 @@ def process_questions_from_excel(
                 f"{question.id}: {str(e)}"
             )
 
+            failed.append(
+                {
+                    "id": question.id,
+                    "question": question.text,
+                    "error": str(e),
+                }
+            )
+
+    # Cleanup uploaded file after processing
+    delete_uploaded_file(job_id)
+
+
     return {
         "processed_count": len(processed),
+        "failed_count": len(failed),
         "output_file": str(markdown_path),
         "processed_questions": processed,
+        "failed_questions": failed,
+        "processed_questions": processed
     }
