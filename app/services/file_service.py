@@ -92,3 +92,22 @@ def delete_uploaded_file(
         return True
 
     return False
+
+
+
+def delete_output_file(
+    job_id: str,
+) -> bool:
+
+    output_path = (
+        OUTPUTS_DIR /
+        f"answers_{job_id}.md"
+    )
+
+    if output_path.exists():
+
+        output_path.unlink()
+
+        return True
+
+    return False
