@@ -10,6 +10,9 @@ from app.api.routes.download import (
 from app.api.routes.status import (
     router as status_router
 )
+from app.api.routes.cleanup import (
+    router as cleanup_router
+)
 
 app = FastAPI(
     title="Cognitive Offloading API",
@@ -24,3 +27,4 @@ app.include_router(questions_router)
 app.include_router(upload_router)
 app.include_router(download_router)
 app.include_router(status_router)
+app.include_router(cleanup_router)
