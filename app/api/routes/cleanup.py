@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from app.services.file_service import delete_output_file
 
-router = APIRouter(prefix="/cleanup", tags=["Processing"])
+router = APIRouter(prefix="/cleanup", tags=["Cleanup"])
 
 
 @router.post("/{job_id}")
